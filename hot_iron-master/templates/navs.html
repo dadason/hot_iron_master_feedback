@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+           aria-selected="true">ГЛАВНАЯ</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="gates-tab" data-toggle="tab" href="#gates" role="tab" aria-controls="gates"
+           aria-selected="false">ВОРОТА</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="gratings-tab" data-toggle="tab" href="#gratings" role="tab" aria-controls="gratings"
+           aria-selected="false">РЕШЁТКИ</a>
+
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="feedback-tab" data-toggle="tab" href="#feedback" role="tab" aria-controls="feedback"
+           aria-selected="false">ОБРАТНАЯ СВЯЗЬ</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <h1> Горячие железки Алексея Сосновского</h1>
+        <p><img src="./static/img/lanturns_in_forgery.jpg">
+        <h3> Не бизнес, а мастерская творца. Родившиеся фонари готовятся светить
+        </h3>
+        <p>
+
+    </div>
+    <div class="tab-pane fade" id="gates" role="tabpanel" aria-labelledby="gates-tab">
+        {% for item in gates %}
+        <div class="col-md6 border rounded">
+            <h2>{{ item.title }}</h2>
+            <div>
+                <img src="static/img/1/{{ item.photo }}" width="50%">
+            </div>
+            <div>
+                {{ item.content }}
+            </div>
+            {% if current_user.is_authenticated and current_user == item.user %}
+            <div>
+                <a href="/goods/{{ item.id }}" class="btn btn-warning">Изменить</a>
+                <a href="/goods_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% if current_user.is_authenticated %}
+        <div>
+            <a href="/goods/0" class="btn btn-secondary btn-lg">Добавить новое</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="tab-pane fade" id="gratings" role="tabpanel" aria-labelledby="gratings-tab">
+        {% for item in gratings %}
+        <div class="col-md6 border rounded">
+            <h2>{{ item.title }}</h2>
+            <div>
+                <img src="static/img/3/{{ item.photo }}" width="50%">
+            </div>
+            <div>
+                {{ item.content }}
+            </div>
+            {% if current_user.is_authenticated and current_user == item.user %}
+            <div>
+                <a href="/goods/{{ item.id }}" class="btn btn-warning">Изменить</a>
+                <a href="/goods_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% if current_user.is_authenticated %}
+        <div>
+            <a href="/goods/0" class="btn btn-secondary btn-lg">Добавить новое</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+        <form action="/feedback" method="post" class="form-contact">
+            <p><label>Name: </label> <input type="text" name="username" value="" required/>
+            <p><label>Email: </label> <input type="text" name="email" value="" required/>
+            <p><label>Message</label>
+            <p><textarea name="message" rows="7" cols="40"></textarea>
+            <p><input type="submit" value="Отправить"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
