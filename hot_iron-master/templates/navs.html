@@ -7,8 +7,8 @@
            aria-selected="true">ГЛАВНАЯ</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="gates-tab" data-toggle="tab" href="#gates" role="tab" aria-controls="gates"
-           aria-selected="false">ВОРОТА</a>
+        <a class="nav-link" id="vensels-tab" data-toggle="tab" href="#vensels" role="tab" aria-controls="vensels"
+           aria-selected="false">ВЕНЗЕЛЯ</a>
     </li>
     <li class="nav-item" role="presentation">
         <a class="nav-link" id="gratings-tab" data-toggle="tab" href="#gratings" role="tab" aria-controls="gratings"
@@ -24,14 +24,14 @@
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <h1> Горячие железки Алексея Сосновского</h1>
         <p><img src="./static/img/lanturns_in_forgery.jpg">
-        <h3> Не бизнес, а мастерская творца. Родившиеся фонари готовятся светить
+        <h3> Не бизнес, а мастерская творца. Фонари готовятся светить
         </h3>
         <p>
 
     </div>
 
-    <div class="tab-pane fade" id="gates" role="tabpanel" aria-labelledby="gates-tab">
-        {% for item in gates %}
+    <div class="tab-pane fade" id="vensels" role="tabpanel" aria-labelledby="vensels-tab">
+        {% for item in vensels %}
         <div class="col-md6 border rounded">
             <h2>{{ item.title }}</h2>
             <div>
@@ -50,7 +50,7 @@
         {% endfor %}
         {% if current_user.is_authenticated %}
         <div>
-            <a href="/goods/0" class="btn btn-secondary btn-lg">Добавить новое</a>
+            <a href="/add_goods" class="btn btn-secondary btn-lg">Добавить новое</a>
         </div>
         {% endif %}
     </div>
@@ -74,19 +74,20 @@
         {% endfor %}
         {% if current_user.is_authenticated %}
         <div>
-            <a href="/goods/0" class="btn btn-secondary btn-lg">Добавить новое</a>
+            <a href="/add_goods" class="btn btn-secondary btn-lg">Добавить новое</a>
         </div>
         {% endif %}
     </div>
 
     <div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
-        <form action="/feedback" method="post" class="form-contact">
-            <p><label>Name: </label> <input type="text" name="username" value="" required/>
-            <p><label>Email: </label> <input type="text" name="email" value="" required/>
-            <p><label>Message</label>
-            <p><textarea name="message" rows="7" cols="40"></textarea>
-            <p><input type="submit" value="Отправить"/>
-        </form>
+            <form action="/feedback" method="post" class="form-contact">
+    <p><label>Name: </label> <input type="text" name="username" value="" required/>
+    <p><label>Email: </label> <input type="text" name="email" value="" required/>
+    <p><label>Message</label>
+    <p><textarea name="message" rows="7" cols="40"></textarea>
+    <p><input type="submit" value="Отправить"/>
+</form>
     </div>
+
 </div>
 {% endblock %}
