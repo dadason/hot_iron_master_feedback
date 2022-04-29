@@ -1,0 +1,5 @@
+boodstrap
+sqlAlchemy
+flask
+flask wtf form
+datetime
