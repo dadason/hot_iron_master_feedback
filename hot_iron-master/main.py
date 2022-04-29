@@ -13,16 +13,9 @@ from forms.user_form import RegisterForm, LoginForm
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
-mail = Mail(app)
 menu = {'name': 'обратная связь', 'url': 'feedback'}
 
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'test@gmail.com'  # введите свой адрес электронной почты здесь
-app.config['MAIL_DEFAULT_SENDER'] = 'test@gmail.com'  # и здесь
-app.config['MAIL_PASSWORD'] = 'password'  # введите пароль
 
 
 @login_manager.user_loader
